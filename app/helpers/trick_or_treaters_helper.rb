@@ -1,0 +1,2 @@
+module TrickOrTreatersHelper
+end
