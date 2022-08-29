@@ -1,60 +1,62 @@
-<div class="columns" style="height: 100vh; background-image: url(<%= asset_path 'background.png' %>), linear-gradient(#280101 35%, yellow); background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;">
-  <div class="column p-6">
-    <p class="title mb-1 has-text-white-bis">
-      🎃 2022 Muriel Avenue
-    </p>
-    <p class="has-text-white-bis is-family-monospace is-uppercase has-text-weight-bold" style="font-size: 6rem; line-height: 5rem;">
-      Halloween Walk
-    <p class="block subtitle has-text-white-bis has-text-weight-bold">
-      Monday, October 31st, starting at 6:30pm
-    </p>
-    <p class="block has-text-white-bis">
-      Do you have trick-or-treaters in your home? Let us know how many so your neighbours put out the right number of treats!
-    </p>
-    <p class="block has-text-white-bis">
-      No need to stay home and answer the door - just leave a bowl of treats near the sidewalk for trick-or-treaters to help themselves to.
-    </p>
-  </div>
-  <div class="column p-5">
-    <%= turbo_frame_tag "count" do %>
-      <article class="panel is-warning has-background-white-ter m-3">
-        <p class="panel-heading has-text-centered">
-          Trick-or-Treaters Expected:
-        </p>
-        <div class="block has-text-centered has-text-weight-bold", style=" position: relative;">
-          <span style="position: relative; height: 6rem; width: 2rem; font-size:6rem;">
-            <%= @trick_or_treaters.count %>
-          </span>
-          <span class="has-text-left" style="text-align: left; position: absolute; height: 6rem; left: calc(50% + 5rem); top: 3.5rem;">
-            <%= button_to '+1', trick_or_treaters_path(trick_or_treater: TrickOrTreater.new.attributes), method: :post, form: {style: 'display: inline;'}, class: "button is-danger" %>
-            <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.without_sensitivities.last.id), method: :delete, form: {style: 'display: inline;'}, class: "button is-ghost" if @trick_or_treaters.destroyable_by_session(session.id.to_s).without_sensitivities.any? %>
-          </span>
-        </div>
-        <% if @trick_or_treaters.with_sensitivities.any? %>
-          <div class="panel-block is-size-6">
-            <em>which includes:</em>
+<div style="min-height: 100vh; background-image: url(<%= asset_path 'background.png' %>), linear-gradient(#280101 35%, yellow); background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;">
+  <div class="columns" style="max-width: 60rem; margin: 0 auto;">
+    <div class="column p-6">
+      <p class="title mb-1 has-text-white-bis">
+        🎃 Muriel Ave.
+      </p>
+      <p class="has-text-white-bis is-family-monospace is-uppercase has-text-weight-bold" style="font-size: 3rem; line-height: 2.5rem;">
+        Halloween Walk
+      <p class="block subtitle has-text-white-bis has-text-weight-bold">
+        Monday, October 31st, starting at 6:30pm
+      </p>
+      <p class="block has-text-white-bis">
+        Do you have trick-or-treaters in your home? Let us know how many so your neighbours put out the right number of treats!
+      </p>
+      <p class="block has-text-white-bis">
+        No need to stay home and answer the door - just leave a bowl of treats near the sidewalk for trick-or-treaters to help themselves to.
+      </p>
+    </div>
+    <div class="column p-3">
+      <%= turbo_frame_tag "count" do %>
+        <article class="panel is-warning has-background-white-ter m-3">
+          <p class="panel-heading has-text-centered">
+            Trick-or-Treaters Expected:
+          </p>
+          <div class="block has-text-centered has-text-weight-bold", style=" position: relative;">
+            <span style="position: relative; height: 6rem; width: 2rem; font-size:6rem;">
+              <%= @trick_or_treaters.count %>
+            </span>
+            <span class="has-text-left" style="text-align: left; position: absolute; height: 6rem; left: calc(50% + 5rem); top: 3.5rem;">
+              <%= button_to '+1', trick_or_treaters_path(trick_or_treater: TrickOrTreater.new.attributes), method: :post, form: {style: 'display: inline;'}, class: "button is-danger" %>
+              <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.without_sensitivities.last.id), method: :delete, form: {style: 'display: inline;'}, class: "button is-ghost" if @trick_or_treaters.destroyable_by_session(session.id.to_s).without_sensitivities.any? %>
+            </span>
           </div>
-          <div class="panel-block is-size-6">
-            <strong><%= @trick_or_treaters.without_sensitivities.count %></strong>&nbsp;without any sensitivities
-          </div>
-          <% @trick_or_treaters.sensitivity_counts.each do |sensitivity, count| %>
+          <% if @trick_or_treaters.with_sensitivities.any? %>
             <div class="panel-block is-size-6">
-              <strong><%= count %></strong>&nbsp;sensitive to&nbsp;<strong> <%= sensitivity %></strong>
-              <div class="block" style="display: inline-block; height: 2rem; position: relative; top: 0.1rem; right: -0.5rem; ">
-                <%= button_to '+1', trick_or_treaters_path(trick_or_treater: TrickOrTreater.new(sensitivity: sensitivity).attributes), method: :post, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-danger is-small" %>
-                <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.where(sensitivity: sensitivity).last.id), method: :delete, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-ghost is-small" if @trick_or_treaters.destroyable_by_session(session.id.to_s).any? %>
+              <em>which includes:</em>
+            </div>
+            <div class="panel-block is-size-6">
+              <strong><%= @trick_or_treaters.without_sensitivities.count %></strong>&nbsp;without any sensitivities
+            </div>
+            <% @trick_or_treaters.sensitivity_counts.each do |sensitivity, count| %>
+              <div class="panel-block is-size-6">
+                <strong><%= count %></strong>&nbsp;sensitive to&nbsp;<strong> <%= sensitivity %></strong>
+                <div class="block" style="display: inline-block; height: 2rem; position: relative; top: 0.1rem; right: -0.5rem; ">
+                  <%= button_to '+1', trick_or_treaters_path(trick_or_treater: TrickOrTreater.new(sensitivity: sensitivity).attributes), method: :post, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-danger is-small" %>
+                  <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.where(sensitivity: sensitivity).last.id), method: :delete, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-ghost is-small" if @trick_or_treaters.destroyable_by_session(session.id.to_s).any? %>
+                </div>
               </div>
+            <% end %>
+            <div class="panel-block is-size-6">
+              <%= render 'form' %>
+            </div>
+          <% else %>
+            <div class="panel-block is-size-6">
+              <%= render 'form' %>
             </div>
           <% end %>
-          <div class="panel-block is-size-6">
-            <%= render 'form' %>
-          </div>
-        <% else %>
-          <div class="panel-block is-size-6">
-            <%= render 'form' %>
-          </div>
-        <% end %>
-      </article>
-    <% end %>
+        </article>
+      <% end %>
+    </div>
   </div>
 </div>
