@@ -1,6 +1,6 @@
-# fly.toml file generated for murielhalloween-fun on 2022-08-29T14:12:08-04:00
+# fly.toml file generated for murielhalloween on 2022-08-29T14:34:46-04:00
 
-app = "murielhalloween-fun"
+app = "murielhalloween"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
