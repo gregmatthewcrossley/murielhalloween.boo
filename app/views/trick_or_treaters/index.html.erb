@@ -43,7 +43,7 @@
                 <strong><%= count %></strong>&nbsp;sensitive to&nbsp;<strong> <%= sensitivity %></strong>
                 <div class="block" style="display: inline-block; height: 2rem; position: relative; top: 0.1rem; right: -0.5rem; ">
                   <%= button_to '+1', trick_or_treaters_path(trick_or_treater: TrickOrTreater.new(sensitivity: sensitivity).attributes), method: :post, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-danger is-small" %>
-                  <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.where(sensitivity: sensitivity).last.id), method: :delete, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-ghost is-small" if @trick_or_treaters.destroyable_by_session(session.id.to_s).any? %>
+                  <%= button_to '↺', trick_or_treater_path(id: @destroyable_trick_or_treaters.where(sensitivity: sensitivity).last.id), method: :delete, form: {style: 'display:inline-block; line-height:2.25rem'}, class: "button is-ghost is-small" if @destroyable_trick_or_treaters.where(sensitivity: sensitivity).any? %>
                 </div>
               </div>
             <% end %>
