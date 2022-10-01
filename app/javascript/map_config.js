@@ -5,6 +5,7 @@ let map;
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 43.6823437, lng: -79.3450809 },
+    disableDefaultUI: true,
     zoom: 17,
     styles: [
       {
@@ -191,6 +192,41 @@ function initMap() {
           ]
       }
   ],
+  });
+  const lineSymbol = {
+    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+  };
+  const line = new google.maps.Polyline({
+    path: [
+      { lat: 43.68368377552186, lng: -79.34565079283462 }, 
+      { lat: 43.68067879330641, lng: -79.34454016472249 }, 
+    ],
+    strokeColor: "#F14668",
+    strokeOpacity: 1.0,
+    strokeWeight: 4,
+    icons: [
+      {
+        icon: lineSymbol,
+        offset: "100%",
+      },
+    ],
+    map: map,
+  });
+  const line2 = new google.maps.Polyline({
+    path: [
+      { lat: 43.68066133533982, lng: -79.34469305063634 },  
+      { lat: 43.68366535631071, lng: -79.34582201394166 },
+    ],
+    strokeColor: "#F14668",
+    strokeOpacity: 1.0,
+    strokeWeight: 4,
+    icons: [
+      {
+        icon: lineSymbol,
+        offset: "100%",
+      },
+    ],
+    map: map,
   });
 }
 
