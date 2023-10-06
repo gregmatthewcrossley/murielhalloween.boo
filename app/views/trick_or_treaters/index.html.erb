@@ -1,10 +1,10 @@
 <div style="min-height: 100vh; background-image: url(<%= asset_path 'background.png' %>), linear-gradient(#280101 35%, yellow); background-repeat: no-repeat; background-size: cover; background-blend-mode: darken;">
-  <div class="columns" style="max-width: 80rem; margin: 0 auto;">
-    <div class="column p-6">
+  <div class="columns" style="max-width: 40rem; margin: 0 auto;">
+    <div class="column px-5">
       <p class="title mb-1 has-text-white-bis">
         🎃 Muriel Ave.
       </p>
-      <p class="has-text-white-bis is-family-monospace is-uppercase has-text-weight-bold" style="font-size: 3rem; line-height: 2.5rem;">
+      <p class="py-2 has-text-white-bis is-family-secondary is-uppercase has-text-weight-bold" style="font-size: 3rem; line-height: 2.5rem;">
         Halloween Walk
       <p class="block subtitle has-text-white-bis has-text-weight-bold">
         Tuesday, October 31st, starting at 6:30pm
@@ -15,10 +15,10 @@
       <p class="block has-text-white-bis">
         If your trick-or-treater has any sensativities (allergies, etc.) please look for it below, or add it to the "add a new sentitivity" section
       </p>
+      <p class="block has-text-white-bis">
+       Check back here a few days before halloween to figure out how many treats to put out!
+      </p>
     </div>
   </div>
-  <div class="columns" style="max-width: 80rem; margin: 0 auto;">
-    <%= render 'counter' %>
-    <%= render 'map' %>
-  </div>
+  <%= render 'counter' %>
 </div>
